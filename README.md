@@ -9,3 +9,4 @@ Repositório criado para armazenar os códigos de treinamento em _Vue.js_.
 
 - Documentação:
   - [Aula 01 - Configuração do ambiente](docs/AULA_01.md)
+  - [Aula 02 - Criação de projetos](docs/AULA_02.md)
