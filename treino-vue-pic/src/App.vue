@@ -1,60 +1,44 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div>
+    <h1>{{ titulo }}</h1>
+    <!-- O problema do uso do "v-bind", é que o elemento vai ficar bastante "verboso", imagina colocar 4 atributos,
+     teríamos 4 "v-binds". Imaginando isso, o "Vue" tem um "atalho" para não precisar ficar colocando o "v-bind", 
+     sendo que apenas colocando ":" na frente do atributo, tem o mesmo efeito de ter o "v-bind". -->
+    <img :src="foto.url" :alt="foto.titulo" />
+
+    <!-- Para fazer com que as informação sejam utilizadas no atributos do elemento, precisamos utilizar diretiva,
+     como o "v-bind", dessa forma o vue "ensina" ao navegador como deve ser renderizado as informações. -->
+    <!-- O "v-bind" faz a mesma coisa que a interpolação, só que dentro de um atributo, associando a informação 
+     retornada no objeto com o atributo. -->
+    <!-- <img v-bind:src="foto.url" v-bind:alt="foto.titulo" /> -->
+    
+    <!-- Dentro de atributos, por exemplo "src" e "alt", não pode ser utilizado interpolação. -->
+    <!-- Por isso, o código abaixo vai apresentar erro ao tentar visualizar a página. -->
+    <!-- <img src="{{ foto.url }}" alt="{{ foto.titulo }}" /> -->
   </div>
+  <!-- O código abaixo vai apresentar o erro "Component template should contain exactly one root element",
+   isso acontece pq no "Vue", dentro da tag "template", só pode existir apenas 1 elemento dentro dela.
+   Para colocarmos mais de um elemento dentro do "template", precisamos envolver o código dentro de uma 
+   tag "div" ou qualquer tag "container". -->
+  <!-- Isso é uma exigência do Vue.js, a tag "template" deve ter apenas um elemento pai, e o restante deve 
+   estar dentro desse elemento. -->
+  <!-- <h1>Treino Vue Pic</h1>
+  <img src="https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png" alt="Cachorro" /> -->
 </template>
 
 <script>
 export default {
-  name: 'app',
-  data () {
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      titulo: 'Treino Vue Pic',
+      foto: {
+        url: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png',
+        titulo: 'Cachorro'
+      }
     }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
