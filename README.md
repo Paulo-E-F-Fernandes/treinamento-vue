@@ -13,3 +13,16 @@ Repositório criado para armazenar os códigos de treinamento em _Vue.js_.
   - [Aula 03 - Entendimento do que foi gerado](docs/AULA_03.md)
   - [Aula 04 - Global View Object](docs/AULA_04.md)
   - [Aula 05 - Interpolação e _data binding_](docs/AULA_05.md)
+
+- **Comando para iniciar a UI**
+  - Abrir uma janela de terminal;
+  - `cd treino-vue-pic` para entrar no diretório do projeto;
+  - `npm install` para instalar todas as dependências que o projeto precisa, pois o ato de criar o projeto, não baixa as dependências;
+  - `npm run dev` para executar o projeto criado.
+
+- **Comando para iniciar a API**
+  - Abrir uma nova janela de terminal;
+  - `cd treino-vue-pic-api` para entrar no diretório do projeto;
+  - `npm start` para levantar o servidor que disponibiliza a _API_ que será utilizada pela nossa _UI_:
+    - Se tudo correr bem, será exibida a seguinte mensagem no console: `API escutando na porta: 3000`.
+    - Para verificar se a _API_ esta retornando dados, acesse o endereço http://localhost:3000/v1/fotos através de um navegador.
