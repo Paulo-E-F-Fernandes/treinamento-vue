@@ -12,7 +12,7 @@
 - Para instalar o módulo _vue-resource_:
   - Precisamos estar dentro do diretório do projeto _Vue.js_;
   - Abrir um terminal;
-  - Executar o comando `npm install vue-resource@1.0.3 --save` nesse terminal:
+  - Executar o comando `npm install vue-resource --save` nesse terminal:
     - O `--save` serve para incluir o módulo no _package.json_, sinalizando que o módulo é uma dependência da aplicação.
     - **OBS.:** No arquivo _package.json_, é realizada a separação das dependências para a aplicação funcionar (propriedade _"dependencies"_) e quais são as dependências apenas do ambiente de desenvolvimento (propriedade _"devDependencies"_).
   - Além de baixar a dependência, que agora está fazendo parte do diretório *node_modules*, também precisamos registrar essa dependência na nossa aplicação;
