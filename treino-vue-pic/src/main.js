@@ -5,6 +5,12 @@ import Vue from 'vue'
 // podemos fazer a impportação do artefato apenas informando o nome do arquivo "App" de "App.vue".
 import App from './App.vue'
 
+// Application
+import VueResource from 'vue-resource';
+
+// Registra que vamos utilizar o módulo do "vue-resource"
+Vue.use(VueResource);
+
 // Criar uma "View Instance", passando o objeto de configuração para ele
 // O objeto de configuração:
 //    "el" é o elemento do "index.html" que será o alvo para colocar o componente.
