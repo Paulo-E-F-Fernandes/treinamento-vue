@@ -50,20 +50,24 @@ export default {
   data() {
     return {
       titulo: 'Treino Vue Pic',
-      fotos: [
-        {
-          url: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png',
-          titulo: 'Cachorro'
-        },
-        {
-          url: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png',
-          titulo: 'Cachorrão'
-        },
-        {
-          url: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png',
-          titulo: 'Cachorrinho'
-        }
-      ]
+      fotos: []
+
+      // Com a inclusão do VueResource para consumir os dados da API, não faz mais sentido ter uma lista fixa para exibir as fotos.
+      // fotos: [
+      //   {
+      //     url: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png',
+      //     titulo: 'Cachorro'
+      //   },
+      //   {
+      //     url: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png',
+      //     titulo: 'Cachorrão'
+      //   },
+      //   {
+      //     url: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png',
+      //     titulo: 'Cachorrinho'
+      //   }
+      // ]
+
       // foto1: {
       //   url: 'https://love.doghero.com.br/wp-content/uploads/2018/12/golden-retriever-1.png',
       //   titulo: 'Cachorro'
@@ -73,6 +77,31 @@ export default {
       //   titulo: 'Cachorrão'
       // }
     }
+  },
+
+  // Todo o componente do Vue.js tem o que chamando de "Lifecycle Hooks" (gancho no ciclo de vida).
+  // O "created" é uma das fases do ciclo de vida do componente, sendo uma função que é chamado no momento da criação do componente.
+  // Para saber sobre os "hooks" de um componente, pode ser acessado o link https://vuejs.org/api/#Options-Lifecycle-Hooks
+  created() {
+    // Para acessar a API e buscar as fotos que devem ser exibidas no nosso componente,
+    //  vamos usar a instrução "this.$http".
+    // O "this" é para referenciar o próprio componente (App.vue) e o "$http", só está disponível
+    //  no componente, pq importamos e registramos o "VueResource".
+    // A função "get" retorno um "promise" 
+    let promise = this.$http.get('http://localhost:3000/v1/fotos');
+    // Para resolver a "promise" retornado pelo "get", utilizamos a função "then"
+    // Ao resolver a primeira "promise", chamamos a função "json" do resultado (res), 
+    //  e esse função também retorna uma "promise", por isso conseguimos encadear os "thens".
+    promise
+      .then(res => res.json())
+      .then(fotos => this.fotos = fotos, err => console.log(err));
+
+    // Podemos deixar o código acima mais enxuto, como mostrado abaixo
+    /*
+    this.$http.get('http://localhost:3000/v1/fotos')
+      .then(res => res.json())
+      .then(fotos => this.fotos = fotos);
+    */
   }
 }
 </script>
