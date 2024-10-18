@@ -1,12 +1,25 @@
-<template>
-  <div>
-    <h1>{{ titulo }}</h1>
+<!-- Para gerar o conteúdo da "div" abaixo, o VSCode permite o uso do "Emmet", que é uma forma abreviada para gerar o html. -->
+<!-- Foi utilizado a comando abaixo para gerar o conteúdo que será utilizado dentro da lista de itens da foto. -->
+<!-- div.painel>h2.painel-titulo+div.painel-conteudo -->
+<!-- <div class="painel"> -->
+<!--   <h2 class="painel-titulo"></h2> -->
+<!--   <div class="painel-conteudo"></div> -->
+<!-- </div> -->
 
-    <ul>
+<template>
+  <div class="corpo">
+    <h1 class="centralizado">{{ titulo }}</h1>
+
+    <ul class="lista-fotos">
       <!-- OBS.: Além do v-for="foto of fotos", também podemos utilizar o v-for="foto in fotos" -->
       <!-- Quando usamos "of", estamos mais próximos da sintaxe dos iterators em JavaScript. -->
-      <li v-for="foto of fotos">
-        <img :src="foto.url" :alt="foto.titulo">
+      <li class="lista-fotos-item" v-for="foto of fotos">
+        <div class="painel">
+          <h2 class="painel-titulo">{{ foto.titulo }}</h2>
+          <div class="painel-conteudo">
+            <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
+          </div>
+        </div>
       </li>
     </ul>
 
@@ -107,4 +120,50 @@ export default {
 </script>
 
 <style>
+  .corpo {
+    font-family: Helvetica, sans-serif;
+    width: 96%;
+    margin: 0 auto;
+  }
+
+  .centralizado {
+    text-align: center;
+  }
+
+  .lista-fotos {
+    /* Para remover os bullets da lista de fotos */
+    list-style: none;
+  }
+
+  /* Seletor hierárquico*/
+  .lista-fotos .lista-fotos-item {
+    display: inline-block;
+  }
+
+  .imagem-responsiva {
+    /* Largura de 100% do elemento pai */
+    width: 100%;
+  }
+
+  /* Estilo do painel */
+  .painel {
+    padding: 0 auto;
+    border: solid 2px grey;
+    display: inline-block;
+    margin: 5px;
+    box-shadow: 5px 5px 10px grey;
+    width: 200px;
+    height: 100%;
+    vertical-align: top;
+    text-align: center;
+  }
+
+  .painel .painel-titulo {
+    text-align: center;
+    border: solid 2px;
+    background: lightblue;
+    margin: 0 0 15px 0;
+    padding: 10px;
+    text-transform: uppercase;
+  }
 </style>
