@@ -15,6 +15,7 @@ Repositório criado para armazenar os códigos de treinamento em _Vue.js_.
   - [Aula 05 - Interpolação e _data binding_](docs/AULA_05.md)
   - [Separação da _API_ e _UI_](docs/SEPARACAO_PROJETOS.md)
   - [Acessar _API_ com _Vue.js_](docs/ACESSO_API.md)
+  - [_Slots_ nomeados](docs/NAMED_SLOT.md)
 
 - **Comando para iniciar a UI**
   - Abrir uma janela de terminal;
