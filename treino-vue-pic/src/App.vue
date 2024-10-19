@@ -14,12 +14,10 @@
       <!-- OBS.: Além do v-for="foto of fotos", também podemos utilizar o v-for="foto in fotos" -->
       <!-- Quando usamos "of", estamos mais próximos da sintaxe dos iterators em JavaScript. -->
       <li class="lista-fotos-item" v-for="foto of fotos">
-        <div class="painel">
-          <h2 class="painel-titulo">{{ foto.titulo }}</h2>
-          <div class="painel-conteudo">
-            <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
-          </div>
-        </div>
+        <!-- Utilizando o componente 'shared' que importamos e colocamos o apelido de 'meu-painel' -->
+        <meu-painel :titulo="foto.titulo">
+          <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
+        </meu-painel>
       </li>
     </ul>
 
@@ -59,7 +57,18 @@
 </template>
 
 <script>
+// 1.1) Só de colocar o "import" do componente, não quer dizer que App.vue está utilizando o componente
+import Painel from './components/shared/painel/Painel.vue';
+
 export default {
+  // 1.2) Também precisamos colocar um apelido para o componente e dessa forma conseguimos referenciar o componente importado 
+  components: {
+    // Como utilizamos '-' no apelido do componente, foi preciso colocar entre aspas simples
+    // Caso não tivesse o hifen, não seria necessário o uso das aspas simples
+    // É uma boa prática colocar um prefixo, nos componentes que estão sendo importados
+    'meu-painel': Painel
+  },
+
   data() {
     return {
       titulo: 'Treino Vue Pic',
@@ -143,27 +152,5 @@ export default {
   .imagem-responsiva {
     /* Largura de 100% do elemento pai */
     width: 100%;
-  }
-
-  /* Estilo do painel */
-  .painel {
-    padding: 0 auto;
-    border: solid 2px grey;
-    display: inline-block;
-    margin: 5px;
-    box-shadow: 5px 5px 10px grey;
-    width: 200px;
-    height: 100%;
-    vertical-align: top;
-    text-align: center;
-  }
-
-  .painel .painel-titulo {
-    text-align: center;
-    border: solid 2px;
-    background: lightblue;
-    margin: 0 0 15px 0;
-    padding: 10px;
-    text-transform: uppercase;
   }
 </style>

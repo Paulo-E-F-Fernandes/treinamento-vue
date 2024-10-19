@@ -28,3 +28,11 @@ Repositório criado para armazenar os códigos de treinamento em _Vue.js_.
   - `npm start` para levantar o servidor que disponibiliza a _API_ que será utilizada pela nossa _UI_:
     - Se tudo correr bem, será exibida a seguinte mensagem no console: `API escutando na porta: 3000`.
     - Para verificar se a _API_ esta retornando dados, acesse o endereço http://localhost:3000/v1/fotos através de um navegador.
+
+- **Componentes _"Shared"_**
+  - O que é comum no nosso sistema, ou seja, que pode ser reutilizado em diversos componentes, podemos criar como um componente _"Shared"_ (um componente compartilhável);
+  - Uma boa prática ao criar componentes compartilháveis em _Vue.js_ é:
+    - Criar dentro de _"src"_ a pasta _"components"_;
+      - Dentro de _"components"_, para os componentes compartilháveis, criar a pasta _"shared"_;
+      - E dentro da pasta _"shared"_, criar pasta com o nome do nosso componente, para cada um deles.
+
