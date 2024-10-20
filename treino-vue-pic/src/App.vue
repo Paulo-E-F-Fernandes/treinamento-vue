@@ -31,7 +31,7 @@
       <li class="lista-fotos-item" v-for="foto of fotosFiltradas">
         <!-- Utilizando o componente 'shared' que importamos e colocamos o apelido de 'meu-painel' -->
         <meu-painel :titulo="foto.titulo">
-          <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
+          <imagem-responsiva :url="foto.url" :titulo="foto.titulo" />
         </meu-painel>
       </li>
     </ul>
@@ -74,6 +74,7 @@
 <script>
 // 1.1) Só de colocar o "import" do componente, não quer dizer que App.vue está utilizando o componente
 import Painel from './components/shared/painel/Painel.vue';
+import ImagemResponsiva from './components/shared/imagem-responsiva/ImagemResponsiva.vue';
 
 export default {
   // 1.2) Também precisamos colocar um apelido para o componente e dessa forma conseguimos referenciar o componente importado 
@@ -81,7 +82,8 @@ export default {
     // Como utilizamos '-' no apelido do componente, foi preciso colocar entre aspas simples
     // Caso não tivesse o hifen, não seria necessário o uso das aspas simples
     // É uma boa prática colocar um prefixo, nos componentes que estão sendo importados
-    'meu-painel': Painel
+    'meu-painel': Painel,
+    'imagem-responsiva': ImagemResponsiva
   },
 
   data() {
@@ -181,11 +183,6 @@ export default {
   /* Seletor hierárquico*/
   .lista-fotos .lista-fotos-item {
     display: inline-block;
-  }
-
-  .imagem-responsiva {
-    /* Largura de 100% do elemento pai */
-    width: 100%;
   }
 
   .filtro {
