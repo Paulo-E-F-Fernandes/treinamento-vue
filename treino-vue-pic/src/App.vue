@@ -10,10 +10,24 @@
   <div class="corpo">
     <h1 class="centralizado">{{ titulo }}</h1>
 
+    <!-- O "v-on:" é uma diretiva do Vue.js que permite informar qual o evento que queremos colocar um código. -->
+    <!-- O "v-on:input" será transformado pelo Vue para o evento "oninput", chamando a função quando for digitada -->
+    <!--  alguma informação no campo em que está declarado. -->
+    <!-- "$event" é um objeto especial do Vue.js que sabe tudo do evento disparado, no caso o evento "oninput". -->
+    <!-- "target" representa quem disparou o evento, no caso o elemento "input". -->
+    <!-- "value" é o valor informado no "target", no caso, o valor do "input". -->
+    <!-- A cada caracter digitado no "input", o valor da variável será atualizado. -->
+    <!-- O 'v-on:input="filtro = $event.target.value"' é um outro tipo de "data binding", o de evento, em que o valor -->
+    <!--  da "view" vai para a fonte de dados, no caso, a variável "filtro" do objeto retornado pela função "data". -->
+    <!-- A interpolação {{ filtro }} pega o valor da fonte de dados e manda para a "view". -->
+    <!-- Só para enfatizar, vale ressaltar que "v-on" realiza um data binding unidirecional que flui da "view" para os dados -->
+    <!--  e a "interpolação" ou "v-bind" realiza uma associação unidirecional que flui dos dados para "view". -->
+    <input type="search" v-on:input="filtro = $event.target.value" class="filtro" placeholder="filtre por título" />
+
     <ul class="lista-fotos">
       <!-- OBS.: Além do v-for="foto of fotos", também podemos utilizar o v-for="foto in fotos" -->
       <!-- Quando usamos "of", estamos mais próximos da sintaxe dos iterators em JavaScript. -->
-      <li class="lista-fotos-item" v-for="foto of fotos">
+      <li class="lista-fotos-item" v-for="foto of fotosFiltradas">
         <!-- Utilizando o componente 'shared' que importamos e colocamos o apelido de 'meu-painel' -->
         <meu-painel :titulo="foto.titulo">
           <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
@@ -72,7 +86,8 @@ export default {
   data() {
     return {
       titulo: 'Treino Vue Pic',
-      fotos: []
+      fotos: [],
+      filtro: ''
 
       // Com a inclusão do VueResource para consumir os dados da API, não faz mais sentido ter uma lista fixa para exibir as fotos.
       // fotos: [
@@ -124,6 +139,24 @@ export default {
       .then(res => res.json())
       .then(fotos => this.fotos = fotos);
     */
+  },
+
+  // O Vue oferece uma solução chamada de "computed property"
+  // Na aplicação temos uma lista de fotos, que precisa ser computada podendo retornar uma lista diferente da original.
+  // Sempre que tivemos que realizar algum cálculo ou aplicar alguma lógica dinamicamente podemos usar "computed property".
+  // Dentro da propriedade "computed", devemos apenas colocar funções, pois necessitamos executar códigos com lógica.
+  computed: {
+    fotosFiltradas() {
+      if (this.filtro) {
+        // Primeiro vamos criar uma expressão regular para auxiliar no filtro
+        // Vamos utilizar o valor informado em "this.filtro", e o 'i' significa que será utilizado "case insensitive"
+        let regexp = new RegExp(this.filtro.trim(), 'i');
+        // Vamos utilizar a expressão regular como condição do "filter" na lista de fotos.
+        return this.fotos.filter(foto => regexp.test(foto.titulo));
+      } else {
+        return this.fotos;
+      }
+    }
   }
 }
 </script>
@@ -151,6 +184,11 @@ export default {
 
   .imagem-responsiva {
     /* Largura de 100% do elemento pai */
+    width: 100%;
+  }
+
+  .filtro {
+    display: block;
     width: 100%;
   }
 </style>
