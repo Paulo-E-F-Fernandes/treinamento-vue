@@ -2,13 +2,18 @@
     <div class="painel">
         <!-- O "@dblclick" é um atalho para o "v-on:dblclick" -->
         <h2 class="painel-titulo" @dblclick="visivel = !visivel">{{ titulo  }}</h2>
-        <!-- Não pode ser incluído o "v-show" no "slot", então é necessário colocar o "slot" -->
-        <!--  dentro de uma "div" e na "div" colocamos o "v-show" -->
-        <div class="painel-conteudo" v-show="visivel">
-            <!-- Para que o Vue.js entenda onde deve ser colocado o contéudo que é colocado dentro da tag -->
-            <!--  que representa esse componente compartilhável nos outros componentes, existe a tag "slot". -->
-            <slot></slot>
-        </div>
+        <!-- O "transition" é uma marcação que o Vue aplica para indicar o momento da transição do elemento -->
+        <!--  dessa forma, sabemos o momento exato para aplicar o estilo na transição. -->
+        <!-- O "transition" pode ter apenas um elemento como filho. -->
+        <transition name="painel-fade">
+            <!-- Não pode ser incluído o "v-show" no "slot", então é necessário colocar o "slot" -->
+            <!--  dentro de uma "div" e na "div" colocamos o "v-show" -->
+            <div class="painel-conteudo" v-show="visivel">
+                <!-- Para que o Vue.js entenda onde deve ser colocado o contéudo que é colocado dentro da tag -->
+                <!--  que representa esse componente compartilhável nos outros componentes, existe a tag "slot". -->
+                <slot></slot>
+            </div>
+        </transition>
     </div>
 </template>
   
@@ -56,6 +61,18 @@ export default {
     /*  apenas o template desse componente. */
     * {
         box-shadow: 5px 5px 5px;
+    }
+
+    /* Como colocamos o nome do "transition" como "painel-fade", o Vue vai adicionar automaticamente as classes: */
+    /* "painel-fade-enter" - antes do elemento ser incluído ou removido, o estado atual */
+    /* "painel-fade-enter-active" - quando o elemento está sendo incluído */
+    /* "painel-fade-leave-active" - quando o elemento está sendo removido */
+    .painel-fade-enter, .painel-fade-leave-active {
+        opacity: 0;
+    }
+
+    .painel-fade-enter-active, .painel-fade-leave-active {
+        transition: opacity .4s; /* .4s = 0.400s = 400ms */
     }
 </style>
   
