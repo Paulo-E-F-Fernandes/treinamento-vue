@@ -22,7 +22,8 @@
     <!-- A interpolação {{ filtro }} pega o valor da fonte de dados e manda para a "view". -->
     <!-- Só para enfatizar, vale ressaltar que "v-on" realiza um data binding unidirecional que flui da "view" para os dados -->
     <!--  e a "interpolação" ou "v-bind" realiza uma associação unidirecional que flui dos dados para "view". -->
-    <input type="search" v-on:input="filtro = $event.target.value" class="filtro" placeholder="filtre por título" />
+    <!-- O "@input" é um atalho para o "v-on:input" -->
+    <input type="search" @input="filtro = $event.target.value" class="filtro" placeholder="filtre por título" />
 
     <ul class="lista-fotos">
       <!-- OBS.: Além do v-for="foto of fotos", também podemos utilizar o v-for="foto in fotos" -->

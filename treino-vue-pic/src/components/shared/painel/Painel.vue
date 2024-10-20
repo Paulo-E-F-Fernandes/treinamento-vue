@@ -1,16 +1,25 @@
 <template>
     <div class="painel">
-        <h2 class="painel-titulo">{{ titulo  }}</h2>
-        <!-- Para que o Vue.js entenda onde deve ser colocado o contéudo que é colocado dentro da tag -->
-        <!--  que representa esse componente compartilhável nos outros componentes, existe a tag "slot". -->
-        <slot class="painel-conteudo"></slot>
+        <!-- O "@dblclick" é um atalho para o "v-on:dblclick" -->
+        <h2 class="painel-titulo" @dblclick="visivel = !visivel">{{ titulo  }}</h2>
+        <!-- Não pode ser incluído o "v-show" no "slot", então é necessário colocar o "slot" -->
+        <!--  dentro de uma "div" e na "div" colocamos o "v-show" -->
+        <div class="painel-conteudo" v-show="visivel">
+            <!-- Para que o Vue.js entenda onde deve ser colocado o contéudo que é colocado dentro da tag -->
+            <!--  que representa esse componente compartilhável nos outros componentes, existe a tag "slot". -->
+            <slot></slot>
+        </div>
     </div>
 </template>
   
 <script>
 export default {
-    
-    props: ['titulo']
+    props: ['titulo'],
+    data() {
+        return {
+            visivel: false
+        }
+    }
 }
 </script>
 
